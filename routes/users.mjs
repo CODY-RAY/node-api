@@ -25,7 +25,6 @@ User.find({},(e,d)=>{
   var usernames = d.map((x)=>{
     return { username: x.username }
   })
-  
   res.send(usernames)
 })
   

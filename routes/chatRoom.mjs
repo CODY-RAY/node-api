@@ -15,7 +15,7 @@ router.post('/', passport.authenticate('bearer', { session: false }),(req, res) 
 })
 router.post('/:chatId', passport.authenticate('bearer', { session: false }),(req, res) => {
     var chat = new chatRoom.findById(req.params.chatId,(err,chat)=>{
-     var message = { req.user.username : req.body.message }
+     var message = { "username":req.user.username , "message":req.body.message }
      chat.messages.push(message)
      chat.save()
      res.send("sent")
