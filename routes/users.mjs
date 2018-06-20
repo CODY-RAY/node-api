@@ -30,7 +30,7 @@ User.find({},(e,d)=>{
   
 })
 router.get('/find',passport.authenticate('bearer', { session: false }) ,function(req, res)  {
-  User.find({ "username":req.headers['username'] +"*" },(e,d)=>{
+  User.find({ "username":{ $regex : req.headers['username'] +".*"} },(e,d)=>{
     var usernames = d.map((x)=>{
       return { username: x.username }
     })

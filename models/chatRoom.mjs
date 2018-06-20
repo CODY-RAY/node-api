@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
             message:String,
         }]
   ,
-  users: [mongoose.Schema.Types.ObjectId]
+  users: [String]
 });
 
 // Export the Mongoose model
