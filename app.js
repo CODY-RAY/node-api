@@ -1,6 +1,9 @@
 var createError = require('http-errors');
 var express = require('express');
+var app = express();
 var path = require('path');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
@@ -9,7 +12,6 @@ var loginRouter = require('./routes/login.mjs');
 var chatRoomsRouter = require('./routes/chatRoom.mjs');
 var User = require("./models/user.mjs")
 var mongoose = require("mongoose")
-var app = express();
 var passport = require("passport");
 var BasicStrategy = require("passport-http").BasicStrategy;
 var BearerStrategy = require("passport-http-bearer")
@@ -55,13 +57,17 @@ passport.use(new BearerStrategy(
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/login", loginRouter)
-app.use("/chatrooms",chatRoomsRouter)
-
+app.use("/chat",chatRoomsRouter)
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

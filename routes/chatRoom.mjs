@@ -33,4 +33,5 @@ router.post('/:chatId', passport.authenticate('bearer', { session: false }),(req
      
  })
 
+ 
 module.exports = router;
