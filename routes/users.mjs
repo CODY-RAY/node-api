@@ -29,8 +29,8 @@ User.find({},(e,d)=>{
 })
   
 })
-router.get('/find', function(req, res)  {
-  User.find({},(e,d)=>{
+router.get('/find',passport.authenticate('bearer', { session: false }) ,function(req, res)  {
+  User.find({ "username":{ $regex : req.headers['username'] +".*"} },(e,d)=>{
     var usernames = d.map((x)=>{
       return { username: x.username }
     })
