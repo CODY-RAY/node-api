@@ -14,7 +14,8 @@ var UserSchema = new mongoose.Schema({
   },
   token:{
     type: String,
-  }
+  },
+  chats: [{ type: mongoose.Schema.Types.ObjectId, ref: 'chatroom' }]
 });
 
 // Execute before each user.save() call

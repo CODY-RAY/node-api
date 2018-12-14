@@ -7,10 +7,10 @@ var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users.mjs');
-var loginRouter = require('./routes/login.mjs');
-var chatRoomsRouter = require('./routes/chatRoom.mjs');
-var User = require("./models/user.mjs")
+var usersRouter = require('./routes/users.js');
+var loginRouter = require('./routes/login.js');
+var chatRoomsRouter = require('./routes/chatRoom.js');
+var User = require("./models/users.js")
 var mongoose = require("mongoose")
 var passport = require("passport");
 var BasicStrategy = require("passport-http").BasicStrategy;
@@ -58,12 +58,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/login", loginRouter)
 app.use("/chat",chatRoomsRouter)
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

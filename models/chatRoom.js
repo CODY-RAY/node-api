@@ -2,15 +2,14 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 // Define our user schema
-var UserSchema = new mongoose.Schema({
+var chatroomSchema = new mongoose.Schema({
     messages: 
         [{
             username:String,
             message:String,
         }]
-  ,
-  users: [String]
+       
 });
 
 // Export the Mongoose model
-module.exports = mongoose.model('chatRoom', UserSchema);
+module.exports = mongoose.model('chatRoom', chatroomSchema);
